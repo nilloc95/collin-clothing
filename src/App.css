@@ -5,6 +5,10 @@ body {
 
 a{
     text-decoration: none;
-    color: rgb(0, 110, 255);
+    color: rgb(23, 115, 158);
     font-weight: bold;
+}
+
+* {
+    box-sizing: border-box;
 }
