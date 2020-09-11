@@ -3,13 +3,15 @@ import FormInput from '../form-input/form-input'
 import './sign-in.scss'
 import CustomButton from '../custom-button/custom-button'
 import {signInWithGoogle, auth} from '../../firebase/firebase.utils'
+import {Redirect} from 'react-router-dom'
 
 class SignIn extends React.Component{
     constructor(props){
         super(props);
             this.state = {
                 email: '',
-                password: ''
+                password: '',
+                redirect: null
             }
     }
 
@@ -25,7 +27,7 @@ class SignIn extends React.Component{
 
         try{
             await auth.signInWithEmailAndPassword(email, password)
-            this.setState({ email: '', password: ''})
+            this.setState({ email: '', password: '', redirect:'/'})
         } catch(error){
             console.log(error)
         }
@@ -33,6 +35,9 @@ class SignIn extends React.Component{
     }
         
     render(){
+        if (this.state.redirect){
+            return <Redirect to={this.state.redirect}/>
+        } 
         return(
             <div className='sign-in'>
                 <h2>I already have an account</h2>
@@ -56,7 +61,14 @@ class SignIn extends React.Component{
                     
                     <div className='buttons'>
                         <CustomButton type='submit' > Sign In </CustomButton>
-                        <CustomButton isGoogleSignIn onClick={signInWithGoogle} >Sign In With Google</CustomButton>
+
+                        <CustomButton type='button' isGoogleSignIn 
+                            onClick={async () => { 
+                            await signInWithGoogle();
+                            this.setState({redirect: '/'});
+                            }}>
+                                Sign In With Google
+                            </CustomButton>
                     </div>
                     
                 </form>
