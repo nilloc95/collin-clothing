@@ -2,7 +2,6 @@ import React from 'react'
 import FormInput from '../form-input/form-input'
 import CustomButton from '../custom-button/custom-button'
 import { auth, createUserProfile } from '../../firebase/firebase.utils'
-import {Redirect} from 'react-router-dom'
 import './sign-up.scss'
 
 class SignIn extends React.Component {
@@ -40,7 +39,6 @@ class SignIn extends React.Component {
         email: '',
         password: '',
         confirmPassword: '',
-        redirect:'/'
     })
 
     } catch (error) {
@@ -55,9 +53,6 @@ class SignIn extends React.Component {
   }
 
   render(){
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />
-    } 
       const {displayName, email, password, confirmPassword} = this.state;
       return(
       <div className='sign-up'>
