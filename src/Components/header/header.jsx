@@ -8,8 +8,8 @@ import CartIcon from '../cart-icon/cart-icon';
 import CartDropdown from '../cart-dropdown/cart-dropdown'
 
 
-const Header = ({ currentUser, hidden }) => (
-    <div className='header'>
+const Header = ({ currentUser, hidden, getRidOfDropdown }) => (
+    <div onClick={getRidOfDropdown} className='header'>
         <Link className='logo-container' to='/'>
             <Logo className='logo'/>
         </Link>

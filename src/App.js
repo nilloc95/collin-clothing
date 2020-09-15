@@ -51,8 +51,8 @@ class App extends React.Component{
       }
 
     return (
-      <div onClick={getRidOfDropdown}>
-        <Header/>
+      <div>
+        <Header getRidOfDropdown={getRidOfDropdown}/>
         <Switch>
           <Route exact path='/' component={HomePage}/>
           <Route path='/shop' component={ShopPage}/>
