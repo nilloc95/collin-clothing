@@ -1,8 +1,13 @@
 import React from "react";
 import './item-card.scss'
+import CustomButton from "../custom-button/custom-button";
+import { connect } from 'react-redux'
+import { addItem } from '../../redux/cart/cart.actions'
 
-const ItemCard = ({ id, name, price, imageUrl }) => (
-    <div className='item-card'>
+const ItemCard = ({ item, addItem }) => {
+    const { name, price, imageUrl } = item
+    return(
+       <div className='item-card'>
         <div 
             className='image' 
             style={{ backgroundImage: `url(${imageUrl})` }} />
@@ -10,8 +15,18 @@ const ItemCard = ({ id, name, price, imageUrl }) => (
             <span className='name'>{name}</span>
             <span className='price'>${price}</span>
         </div>
+        <CustomButton 
+            onClick={() => addItem(item)} 
+            inverted
+        >
+                ADD TO CART
+        </CustomButton>
+    </div> 
+    ) 
+}
 
-    </div>
-)
+const mapDispatchToProps = dispatch => ({
+    addItem: item => dispatch(addItem(item))
+})
 
-export default ItemCard;
+export default connect(null, mapDispatchToProps)(ItemCard);
